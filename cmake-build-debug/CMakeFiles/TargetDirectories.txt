@@ -1,3 +1,0 @@
-C:/Users/Admin/Documents/GitHub/Array.lab/cmake-build-debug/CMakeFiles/Array_lab.dir
-C:/Users/Admin/Documents/GitHub/Array.lab/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Admin/Documents/GitHub/Array.lab/cmake-build-debug/CMakeFiles/rebuild_cache.dir
