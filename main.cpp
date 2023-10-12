@@ -1,9 +1,9 @@
 #include <iostream>
+#include <random>
 using namespace std;
 
 int main() {
-    int elemAmnt, min, max, k, decider, b, g, h, c;
-    double sum, tmp, hophey;
+    int elemAmnt, min, max, k, decider, tmp, sum;
     const int MAX_SIZE = 100;
     cout << "Enter the number of array elements:"<< endl;
     cin >> elemAmnt;
@@ -18,15 +18,13 @@ int main() {
             cin >> min;
             cout << "Enter a upper bound for array element values:" << endl; //min!=max & min<(max-min)
             cin >> max;
-            int *dynArray = new int[2*elemAmnt];
+            int *dynArray = new int[elemAmnt];
             for (int i = 0; i < elemAmnt; i++) {
                 dynArray[i] = rand();
-                if (dynArray[i] > max) {
-                    dynArray[i] = dynArray[i] % max;
-                }
-                if (dynArray[i] < min & dynArray[i] + min < max) {
-                    dynArray[i] += min;
-                }
+                random_device random_device;
+                mt19937 generator(random_device());
+                uniform_int_distribution<> distribution(min, max);
+                dynArray[i] = distribution(generator);
             }
             for (int i = 0; i < elemAmnt; ++i) {
                 cout << dynArray[i] << " ";
@@ -34,7 +32,7 @@ int main() {
             cout << endl;
             tmp = dynArray[0];
             for (int i = 0; i < elemAmnt; i+=1) {
-                if (tmp>dynArray[i] & tmp > -1* dynArray[i]) {
+                if (abs(tmp)>abs(dynArray[i])) {
                     tmp=dynArray[i];
                 }
             }
@@ -44,23 +42,22 @@ int main() {
                 sum+=dynArray[k];
                 k-=1;
             }
-            for(int i=0; i < elemAmnt; i++){
-                dynArray[elemAmnt+i]=dynArray[i];
-            }
-            if (elemAmnt % 2 == 0){
-                b= (elemAmnt) / 2 - 1;
-            }
-            else
-            {
-                b= (elemAmnt) / 2;
-            }
-            for(int i=1; i<b+1; i++){
-                dynArray[i]=dynArray[i*2];
-            }
-            g=1;
-            for(int i=b+1; i < elemAmnt; i++){
-                dynArray[i]=dynArray[elemAmnt+g];
-                g+=2;
+            if (elemAmnt%2==0){
+                for (int i=1; i<=(elemAmnt-2)/2; i+=1){
+                    for (int k=i; k<elemAmnt-1-i; k+=2){
+                        int temp=dynArray[k];
+                        dynArray[k]=dynArray[k+1];
+                        dynArray[k+1]=temp;
+                    }
+                }
+            }else{
+                for (int i=1; i<=(elemAmnt-1)/2; i+=1){
+                    for (int k=i; k<elemAmnt-i; k+=2){
+                        int temp=dynArray[k];
+                        dynArray[k]=dynArray[k+1];
+                        dynArray[k+1]=temp;
+                    }
+                }
             }
             cout << "The sum of the array elements located after the last zero element: " << sum << endl;
             cout << "Minimum modulo array element: " << tmp << endl;
@@ -89,23 +86,22 @@ int main() {
                 sum+=Array[k];
                 k-=1;
             }
-            for(int i=0; i < elemAmnt; i++){
-                Array[elemAmnt+i]=Array[i];
-            }
-            if (elemAmnt % 2 == 0){
-                b= (elemAmnt) / 2 - 1;
-            }
-            else
-            {
-                b= (elemAmnt) / 2;
-            }
-            for(int i=1; i<b+1; i++){
-                Array[i]=Array[i*2];
-            }
-            g=1;
-            for(int i=b+1; i < elemAmnt; i++){
-                Array[i]=Array[elemAmnt+g];
-                g+=2;
+            if (elemAmnt%2==0){
+                for (int i=1; i<=(elemAmnt-2)/2; i+=1){
+                    for (int k=i; k<elemAmnt-1-i; k+=2){
+                        int temp=Array[k];
+                        Array[k]=Array[k+1];
+                        Array[k+1]=temp;
+                    }
+                }
+            }else{
+                for (int i=1; i<=(elemAmnt-1)/2; i+=1){
+                    for (int k=i; k<elemAmnt-i; k+=2){
+                        int temp=Array[k];
+                        Array[k]=Array[k+1];
+                        Array[k+1]=temp;
+                    }
+                }
             }
 
 
